@@ -1,4 +1,4 @@
-# Django Random Users
+# Django usuarios
 
 Aplicación web desarrollada en Django que consume la API pública **Random User Generator** para mostrar un catálogo de usuarios aleatorios con paginación y perfiles detallados.
 
