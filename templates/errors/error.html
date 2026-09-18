@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Error - Random Users{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm text-center">
+            <div class="card-body py-5">
+                <h2 class="fw-bold mb-3">Oops, algo salió mal</h2>
+                <p class="text-muted mb-4">No pudimos obtener la información de los usuarios. Por favor, intenta nuevamente.</p>
+                <a href="{% url 'users:user_list' %}" class="btn btn-custom btn-lg">
+                    Volver al Catálogo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Catálogo de Usuarios - Random Users{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-3">Catálogo de Usuarios</h1>
+</div>
+
+<div class="row g-4">
+    {% for user in users %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card user-card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <img src="{{ user.picture.large }}" alt="{{ user.name.first }} {{ user.name.last }}" class="rounded-circle mb-3 user-avatar">
+                <h5 class="card-title fw-bold mb-2">{{ user.name.first }} {{ user.name.last }}</h5>
+                <p class="text-muted mb-1">
+                    {{ user.login.username }}
+                </p>
+                <p class="text-muted mb-2">
+                    {{ user.email }}
+                </p>
+                <p class="text-muted mb-3">
+                    {{ user.location.city }}, {{ user.location.country }}
+                </p>
+                <a href="{% url 'users:user_detail' user.login.uuid %}" class="btn btn-custom w-100">
+                    Ver Perfil
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            No se encontraron usuarios
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav class="mt-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if not prev_page %}disabled{% endif %}">
+            {% if prev_page %}
+            <a class="page-link" href="?page={{ prev_page }}">
+                Anterior
+            </a>
+            {% else %}
+            <span class="page-link">
+                Anterior
+            </span>
+            {% endif %}
+        </li>
+        
+        <li class="page-item active">
+            <span class="page-link">Página {{ current_page }}</span>
+        </li>
+        
+        <li class="page-item">
+            <a class="page-link" href="?page={{ next_page }}">
+                Siguiente
+            </a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}

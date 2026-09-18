@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.name.first }} {{ user.name.last }} - Random Users{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'users:user_list' %}" class="btn btn-outline-custom">
+        Volver al Catálogo
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <img src="{{ user.picture.large }}" alt="{{ user.name.first }} {{ user.name.last }}" class="rounded-circle mb-3 profile-avatar">
+                <h3 class="fw-bold mb-1">{{ user.name.first }} {{ user.name.last }}</h3>
+                <p class="text-muted mb-2">
+                    {{ user.login.username }}
+                </p>
+                <span class="badge badge-custom mb-3">
+                    {{ user.location.country }}
+                </span>
+                <p class="text-muted small mb-0">
+                    UUID: {{ user.login.uuid }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header header-personal">
+                <h5 class="mb-0">Información Personal</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Nombre</p>
+                        <p class="fw-semibold">{{ user.name.first }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Apellido</p>
+                        <p class="fw-semibold">{{ user.name.last }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Nombre Completo</p>
+                        <p class="fw-semibold">{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Género</p>
+                        <p class="fw-semibold">
+                            {% if user.gender == 'male' %}
+                            Masculino
+                            {% else %}
+                            Femenino
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Fecha de Nacimiento</p>
+                        <p class="fw-semibold">{{ user.dob.date|slice:":10" }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Edad</p>
+                        <p class="fw-semibold">{{ user.dob.age }} años</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header header-contact">
+                <h5 class="mb-0">Contacto</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Correo Electrónico</p>
+                        <p class="fw-semibold">
+                            <a href="mailto:{{ user.email }}" class="text-decoration-none">{{ user.email }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Teléfono</p>
+                        <p class="fw-semibold">{{ user.phone }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Celular</p>
+                        <p class="fw-semibold">{{ user.cell }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header header-location">
+                <h5 class="mb-0">Ubicación</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">País</p>
+                        <p class="fw-semibold">{{ user.location.country }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Estado</p>
+                        <p class="fw-semibold">{{ user.location.state }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Ciudad</p>
+                        <p class="fw-semibold">{{ user.location.city }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Calle y Número</p>
+                        <p class="fw-semibold">{{ user.location.street.name }} {{ user.location.street.number }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Código Postal</p>
+                        <p class="fw-semibold">{{ user.location.postcode }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Coordenadas</p>
+                        <p class="fw-semibold">{{ user.location.coordinates.latitude }}, {{ user.location.coordinates.longitude }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header header-account">
+                <h5 class="mb-0">Cuenta</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Username</p>
+                        <p class="fw-semibold">{{ user.login.username }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">UUID</p>
+                        <p class="fw-semibold small">{{ user.login.uuid }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Fecha de Registro</p>
+                        <p class="fw-semibold">{{ user.registered.date|slice:":10" }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-muted mb-1 small">Zona Horaria</p>
+                        <p class="fw-semibold">{{ user.location.timezone.description }} ({{ user.location.timezone.offset }})</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
